@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Contacts</string>
+
+    <string name="toolbar_title">Contacts</string>
+    <string name="error_internet_not_available">Интернет не доступен</string>
+    <string name="error_server_not_available">Сервер не доступен</string>
+    <string name="error_server">Серверная ошибка</string>
+    <string name="error">Непредвиденная ошибка</string>
+
+    <string name="user_id">User id:</string>
+    <string name="email">Email:</string>
+    <string name="organization">Organization:</string>
+    <string name="following">Following:</string>
+    <string name="followers">Followers:</string>
+    <string name="created">Created:</string>
+</resources>
