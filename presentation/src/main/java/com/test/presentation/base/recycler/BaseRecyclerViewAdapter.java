@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.test.domain.entity.DomainModel;
-import com.test.domain.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +35,11 @@ public abstract class BaseRecyclerViewAdapter
 
     public void setItems(List<Entity> items) {
         this.items = items;
+        notifyDataSetChanged();
+    }
+
+    public void addItems(List<Entity> items) {
+        this.items.addAll(items);
         notifyDataSetChanged();
     }
 

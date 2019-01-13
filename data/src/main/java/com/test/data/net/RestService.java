@@ -71,6 +71,11 @@ public class RestService {
                 .getUsers()
                 .compose(errorParserTransformer.<List<UserResponse>, Throwable>parseHttpError());
     }
+    public Observable<List<UserResponse>> getNextUsers(int lastUser) {
+        return restApi
+                .getNextUsers(lastUser)
+                .compose(errorParserTransformer.<List<UserResponse>, Throwable>parseHttpError());
+    }
 
     public Observable<UserDetailsResponce> getUserDetails(String userName) {
         return restApi

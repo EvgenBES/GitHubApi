@@ -11,6 +11,8 @@ public interface UserRepository {
 
     Observable<List<User>> getUsers ();
 
+    Observable<List<User>> getNextUsers (int lastUser);
+
     Observable<UserDetails> getUserDetails (String userName);
 
     Observable<List<String>> getOrganizations (String userName);

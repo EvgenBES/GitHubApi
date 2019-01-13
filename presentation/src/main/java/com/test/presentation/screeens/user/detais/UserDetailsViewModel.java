@@ -1,11 +1,9 @@
 package com.test.presentation.screeens.user.detais;
 
 import android.databinding.BindingAdapter;
-import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -15,7 +13,6 @@ import com.test.domain.entity.User;
 import com.test.domain.entity.UserDetails;
 import com.test.domain.usecases.GetUserDetailsUseCase;
 import com.test.presentation.base.BaseViewModel;
-import com.test.presentation.screeens.user.list.UserListRouter;
 
 import java.util.List;
 
@@ -25,7 +22,7 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 
-public class UserDetailsViewModel extends BaseViewModel<UserListRouter, User> {
+public class UserDetailsViewModel extends BaseViewModel<UserDetailsRouter, User> {
 
     public ObservableInt progress = new ObservableInt(View.VISIBLE);
     public ObservableInt emailLayout = new ObservableInt(View.VISIBLE);

@@ -29,4 +29,11 @@ public class GetUserUseCase extends BaseUseCase {
                 .observeOn(postExecutionThread);
     }
 
+    public Observable<List<User>> getNextUsers(int lastUser) {
+        return userRepository
+                .getNextUsers(lastUser * 46 + 1)
+                .subscribeOn(executionThread)
+                .observeOn(postExecutionThread);
+    }
+
 }

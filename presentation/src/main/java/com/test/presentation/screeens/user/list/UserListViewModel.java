@@ -1,7 +1,6 @@
 package com.test.presentation.screeens.user.list;
 
 import android.databinding.ObservableInt;
-import android.util.Log;
 import android.view.View;
 
 import com.test.app.App;
@@ -22,7 +21,10 @@ import io.reactivex.disposables.Disposable;
 public class UserListViewModel extends BaseViewModel<UserListRouter, User> {
 
     public ObservableInt peopleProgress = new ObservableInt(View.VISIBLE);
+    public ObservableInt addPeople = new ObservableInt(View.GONE);
     public UserListAdapter adapter = new UserListAdapter();
+    public Boolean isScrolling = false;
+    public int page = 1;
 
     @Inject
     public GetUserUseCase getUserUseCase;
@@ -92,6 +94,36 @@ public class UserListViewModel extends BaseViewModel<UserListRouter, User> {
                     @Override
                     public void onComplete() {
                         peopleProgress.set(View.GONE);
+                    }
+                });
+    }
+
+    public void addUsers() {
+        addPeople.set(View.VISIBLE);
+
+        getUserUseCase
+                .getNextUsers(page)
+                .subscribe(new Observer<List<User>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        getCompositeDisposable().add(d);
+                    }
+
+                    @Override
+                    public void onNext(List<User> users) {
+                        page++;
+                        adapter.addItems(users);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        router.showError(e);
+                        addPeople.set(View.GONE);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        addPeople.set(View.GONE);
                     }
                 });
     }

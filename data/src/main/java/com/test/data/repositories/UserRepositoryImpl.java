@@ -48,6 +48,27 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public Observable<List<User>> getNextUsers(int lastUser) {
+        return restService
+                .getNextUsers(lastUser)
+                .map(new Function<List<UserResponse>, List<User>>() {
+                    @Override
+                    public List<User> apply(List<UserResponse> userResponses) throws Exception {
+                        final List<User> listUser = new ArrayList<>();
+
+                        for (UserResponse user : userResponses) {
+                            listUser.add(new User(
+                                    user.getAvatarUrl(),
+                                    user.getLogin(),
+                                    user.getId()));
+                        }
+
+                        return listUser;
+                    }
+                });
+    }
+
+    @Override
     public Observable<UserDetails> getUserDetails(String userName) {
         return restService
                 .getUserDetails(userName)
