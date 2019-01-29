@@ -14,7 +14,7 @@ import io.reactivex.subjects.PublishSubject;
 
 public abstract class BaseRecyclerViewAdapter
         <Entity extends DomainModel,
-        VM extends BaseItemViewModel<Entity>>
+                VM extends BaseItemViewModel<Entity>>
         extends RecyclerView.Adapter<BaseItemViewHolder<Entity, VM, ?>> {
 
     protected boolean isItemClickedEnabled = true;
@@ -39,15 +39,16 @@ public abstract class BaseRecyclerViewAdapter
     }
 
     public void addItems(List<Entity> items) {
+        int position = items.size();
         this.items.addAll(items);
-        notifyDataSetChanged();
+        notifyItemInserted(position - 1);
     }
 
     @Override
     public void onViewAttachedToWindow(final @NonNull BaseItemViewHolder<Entity, VM, ?> holder) {
         super.onViewAttachedToWindow(holder);
 
-        if(isItemClickedEnabled) {
+        if (isItemClickedEnabled) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -62,7 +63,7 @@ public abstract class BaseRecyclerViewAdapter
     @Override
     public void onViewDetachedFromWindow(@NonNull BaseItemViewHolder<Entity, VM, ?> holder) {
         super.onViewDetachedFromWindow(holder);
-        if(isItemClickedEnabled) {
+        if (isItemClickedEnabled) {
             holder.itemView.setOnClickListener(null);
         }
     }

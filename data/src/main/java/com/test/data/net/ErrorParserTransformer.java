@@ -32,20 +32,6 @@ public class ErrorParserTransformer<S> {
 
                                     error = new Error("Ошибка, попробуйте еще раз", ErrorType.UNEXPECTED_ERROR);
 
-                                    try {
-                                        if (httpException.response().errorBody().string().contains("login-already")) {
-                                            error = new Error("Данный email занят",
-                                                    ErrorType.VALID_ERROR);
-                                        } else if (httpException.response().errorBody().string().contains("valid")) {
-                                            error = new Error("Ошибка в имени email(a)",
-                                                    ErrorType.VALID_ERROR);
-                                        }
-                                    } catch (IOException e) {
-                                        error = new Error("Ошибка, попробуйте еще раз.",
-                                                ErrorType.VALID_ERROR);
-
-                                    }
-
                                 } else if (throwable instanceof SocketTimeoutException) {
                                     error = new Error("Internet is not available",
                                             ErrorType.INTERNET_IS_NOT_AVAILABLE);
